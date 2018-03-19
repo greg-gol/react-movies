@@ -12,5 +12,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/papi/": {
+      "target": "http://www.omdbapi.com/?apikey=35fa6920"
+    }
   }
 }
