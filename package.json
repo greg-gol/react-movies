@@ -58,8 +58,12 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "proxy": {
-    "/papi/": {
-      "target": "http://www.omdbapi.com/?apikey=35fa6920"
+    "/papi/*": {
+      "target": "http://www.omdbapi.com/",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/papi/": "?apikey=35fa6920"
+      }
     }
   },
   "jest": {
