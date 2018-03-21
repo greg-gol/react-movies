@@ -3,13 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { fetchMovies } from '../actions/movies';
+import { API_PARAMS } from '../common/constants'
 
 
 class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: ''
+            [API_PARAMS.SEARCH]: ''
         }
     }
 
@@ -26,11 +27,11 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div className="searchbar-wrapper">
+            <div className="searchBar">
                 <form onSubmit={this.handleSubmit}>
                     <label>Enter movie title:</label>
                     <input
-                        name="search"
+                        name={API_PARAMS.SEARCH}
                         type="text"
                         onChange={this.handleChange} />
                     <input type="submit" value="Seach"/>

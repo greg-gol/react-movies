@@ -6,7 +6,7 @@ const ActionTypes = keyMirror({
 });
 
 const API_PARAMS = {
-  search: "s"
+  SEARCH: "s"
 };
 
 export { ActionTypes, API_PARAMS };

@@ -5,7 +5,7 @@ export default class NavBar extends Component {
 
  render() {
     return (
-        <nav className="navbar-nav">
+        <nav className="navBar">
             <Link to="/search">Search movies</Link>
         </nav>
     );

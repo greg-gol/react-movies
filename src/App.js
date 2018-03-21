@@ -5,8 +5,7 @@ import NavBar from './components/navBar';
 import SearchView from './views/searchView';
 
 import logo from './logo.svg';
-import './App.css';
-
+import './App.scss';
 
 export default class App extends Component {
 
