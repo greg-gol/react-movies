@@ -28,7 +28,7 @@ class SearchBar extends Component {
         return (
             <div className="searchbar-wrapper">
                 <form onSubmit={this.handleSubmit}>
-                    <label>Engter movie title:</label>
+                    <label>Enter movie title:</label>
                     <input
                         name="search"
                         type="text"

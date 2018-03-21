@@ -8,8 +8,8 @@ export default class MovieItem extends Component {
 
         return (
             <div className="movieitem-wrapper">
-                <p>{ movieData.Title }</p>
-                <p>{ movieData.Year }</p>
+                <span>Title: { movieData.Title }</span>
+                <span>Year: { movieData.Year }</span>
             </div>
         );
     }
