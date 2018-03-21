@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Navbar extends Component {
+export default class NavBar extends Component {
 
  render() {
     return (
-        <nav>
-            <Link to="/search">Szukaj filmów</Link>
+        <nav className="navbar-nav">
+            <Link to="/search">Search movies</Link>
         </nav>
     );
  }

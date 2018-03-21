@@ -7,7 +7,7 @@ export default class MovieItem extends Component {
         const { movieData } = this.props;
 
         return (
-            <div>
+            <div className="movieitem-wrapper">
                 <p>{ movieData.Title }</p>
                 <p>{ movieData.Year }</p>
             </div>

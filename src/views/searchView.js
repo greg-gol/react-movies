@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import Searchbar from '../components/searchbar';
+import SearchBar from '../components/searchBar';
 import Movieslist from '../components/moviesList';
 
 
 export default class SearchView extends Component {
     render() {
         return (
-            <div>
-                <Searchbar/>
+            <div className="searchview-container">
+                <SearchBar/>
                 <Movieslist/>
             </div>
         );

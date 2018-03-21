@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Navbar from './components/navbar';
+import NavBar from './components/navBar';
 import SearchView from './views/searchView';
 
 import logo from './logo.svg';
@@ -15,10 +15,10 @@ export default class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Witaj w wyszukiwarce filmów</h1>
+          <h1 className="App-title">Welcome</h1>
         </header>
 
-        <Navbar />
+        <NavBar />
 
         <Switch>
           <Route path="/search" component={SearchView} />

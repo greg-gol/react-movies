@@ -1,3 +1,5 @@
+import { API_PARAMS } from '../common/constants'
+
 const FETCH_DEFAULTS = {
   headers: {
     'Accept': 'application/json',
@@ -59,9 +61,12 @@ class Fetcher {
     let qs = "";
 
     for(let key in parameters) {
-      let value = parameters[key];
-      
-      qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+      const value = parameters[key];
+      const mappedApiPropName = API_PARAMS[key];
+
+      if(mappedApiPropName) {
+        qs += encodeURIComponent(mappedApiPropName) + "=" + encodeURIComponent(value) + "&";
+      }
     }
     if (qs.length > 0){
       qs = qs.substring(0, qs.length-1);

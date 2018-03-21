@@ -5,39 +5,37 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/movies';
 
 
-class Searchbar extends Component {
+class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            s: ''
+            search: ''
         }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
-            [e.target.dataset.queryName]: e.target.value
+            [e.target.name]: e.target.value
         });
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         this.props.fetchMovies(this.state);
         e.preventDefault();
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Nazwa filmu:</label>
-                <input
-                    name="movieTitle"
-                    type="text"
-                    data-query-name="s"
-                    onChange={this.handleChange} />
-                <input type="submit" value="Seach"/>
-            </form>
+            <div className="searchbar-wrapper">
+                <form onSubmit={this.handleSubmit}>
+                    <label>Engter movie title:</label>
+                    <input
+                        name="search"
+                        type="text"
+                        onChange={this.handleChange} />
+                    <input type="submit" value="Seach"/>
+                </form>
+            </div>
         );
     }
 }
@@ -48,4 +46,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Searchbar);
+export default connect(null, mapDispatchToProps)(SearchBar);

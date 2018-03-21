@@ -10,7 +10,7 @@ class MoviesList extends Component {
 
         if(movies.moviesList && movies.moviesList.Search) {
             return (
-                <div>
+                <div className="movieslist-item-wrapper">
                     {
                         movies.moviesList.Search.map(movie => <MovieItem movieData={movie} key={movie.imdbID}/>)
                     }
@@ -18,7 +18,7 @@ class MoviesList extends Component {
             );
         } else {
             return (
-                <div>No movies found</div>
+                <div className="movieslist-error">No movies found</div>
             );
         }
     }
