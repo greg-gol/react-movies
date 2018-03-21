@@ -1,8 +1,9 @@
 import {ActionTypes} from "../common/constants";
 
-export const fetchMovies = () => {
+export const fetchMovies = (options) => {
   return {
-    type: ActionTypes.FETCH_MOVIES
+    type: ActionTypes.FETCH_MOVIES,
+    payload: options
   }
 }
 

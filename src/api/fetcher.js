@@ -32,27 +32,42 @@ class Fetcher {
 
 
   get(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'GET'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'GET' }));
   }
 
   post(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'POST'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'POST' }));
   }
 
   put(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'PUT'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'PUT' }));
   }
 
   update(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'UPDATE'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'UPDATE' }));
   }
 
   patch(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'PATCH'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'PATCH' }));
   }
 
   delete(url, initOptions = {}) {
-    return this.fetchJson(url, Object.assign({}, initOptions, {method: 'DELETE'}));
+    return this.fetchJson(url, Object.assign({}, initOptions, { method: 'DELETE' }));
+  }
+
+  buildUrl(url, parameters) {
+    let qs = "";
+
+    for(let key in parameters) {
+      let value = parameters[key];
+      
+      qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+    }
+    if (qs.length > 0){
+      qs = qs.substring(0, qs.length-1);
+      url = url + "&" + qs;
+    }
+    return url;
   }
 
   _checkStatus(response) {
@@ -69,7 +84,7 @@ class Fetcher {
     const contentType = response.headers.get('content-type');
     return contentType && contentType.match(JSON_CONTENT_TYPE_PATTERN) && response.status !== STATUS_CODES.NO_CONTENT;
   }
-  
+
   static _parseJson(response) {
     return response.json();
   }
