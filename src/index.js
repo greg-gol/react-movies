@@ -11,7 +11,6 @@ import rootSaga from './sagas/sagas';
 
 import {BASE_PATH} from './config/global';
 
-import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

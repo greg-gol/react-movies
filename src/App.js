@@ -1,48 +1,28 @@
 import React, { Component } from 'react';
-import {Route, Switch} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
-import {fetchMovies} from './actions/movies';
+import NavBar from './components/navBar';
+import SearchView from './views/searchView';
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
-class App extends Component {
-  componentWillMount() {
-    this.props.fetchMovies();
-  }
+export default class App extends Component {
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        {/* <Switch>
-          <Route path="*" location={location} render={props =>} exact />
-        </Switch> */}
+
+        <NavBar />
+
+        <Switch>
+          <Route path="/search" component={SearchView} />
+        </Switch>
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const {movies} = state;
-
-  return {
-    movies
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchMovies
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
