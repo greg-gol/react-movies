@@ -27,15 +27,17 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div className="searchBar">
-                <form onSubmit={this.handleSubmit}>
-                    <label>Enter movie title:</label>
-                    <input
-                        name={API_PARAMS.SEARCH}
-                        type="text"
-                        onChange={this.handleChange} />
-                    <input type="submit" value="Seach"/>
-                </form>
+            <div className="searchBar row">
+                <div className="col-12">
+                    <form onSubmit={this.handleSubmit}>
+                        <label>Enter movie title:</label>
+                        <input
+                            name={API_PARAMS.SEARCH}
+                            type="text"
+                            onChange={this.handleChange} />
+                        <input type="submit" value="Seach"/>
+                    </form>
+                </div>
             </div>
         );
     }

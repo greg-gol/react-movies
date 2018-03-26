@@ -7,10 +7,12 @@ import Movieslist from '../components/moviesList/moviesList';
 export default class SearchView extends Component {
     render() {
         return (
-            <div className="searchView">
-                <SearchBar/>
-                <Movieslist/>
-            </div>
+            <section className="searchView">
+                <div className="container">
+                    <SearchBar/>
+                    <Movieslist/>               
+                </div>
+            </section>
         );
     }
 }

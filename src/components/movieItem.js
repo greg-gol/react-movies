@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class MovieItem extends Component {
 
@@ -7,7 +8,9 @@ export default class MovieItem extends Component {
 
         return (
             <tr className="moviesList__movieItem">
-                <td>{ movieData.Title }</td>
+                <td>
+                    <Link to={`/movie-details/${ movieData.imdbID }`}>{ movieData.Title }</Link>
+                </td>
                 <td>{ movieData.Year }</td>
             </tr>
         );
