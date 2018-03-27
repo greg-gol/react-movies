@@ -8,7 +8,6 @@ import CustomBadges from '../../components/common/customBadges/customBadges'
 import { fetchMovieById } from '../../actions/movieById';
 import { goBack } from '../../actions/navigation';
 
-import { generateId } from '../../common/helpers';
 import { API_PARAMS } from '../../common/constants'
 
 import './movieDetailsView.scss';
@@ -36,40 +35,25 @@ class MoviesDetailsView extends Component {
     }
 
     togglePlot = () => {
-        this.setState(( (prevState) => {
+        this.setState( (prevState) => {
             return {
                 showPlot: !prevState.showPlot
             }
-        }));
+        });
     }
 
-    shouldRenderPlot(selectedMovie) {
-        if (this.state.showPlot) {
-            return (
-                <div>
-                    <h6><strong>Plot:</strong></h6>
-                    <p>
-                        {selectedMovie.Plot}
-                    </p>
-                    <p className="btn btn-primary d-inline-block" onClick={this.togglePlot}>
-                        Hide plot
-                    </p>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <h6><strong>Plot:</strong></h6>
-                    <p>
-                        { selectedMovie.Plot.substr(0, 20) }...
-                    </p>
-                    <p className="btn btn-success d-inline-block" onClick={this.togglePlot}>
-                        Show plot
-                    </p>
-                </div>
-            );            
-        }
-
+    renderPlot = (selectedMovie) => {
+        return (
+            <div>
+                <h6><strong>Plot:</strong></h6>
+                <p>
+                    { this.state.showPlot ? selectedMovie.Plot : selectedMovie.Plot.substr(0, 20) }
+                </p>
+                <p className="btn btn-primary d-inline-block" onClick={this.togglePlot}>
+                    {this.state.showPlot ? 'Hide plot' : 'Show Plot'}
+                </p>
+            </div>
+        );
     }
 
     componentWillMount() {
@@ -96,7 +80,7 @@ class MoviesDetailsView extends Component {
                                     <div className="moviesDetailsView__header-info col-md-9 mb-3">
                                         <h3 className="moviesDetailsView__header-title d-inline-block mr-3">{selectedMovie.Title}</h3>
                                         <span>({selectedMovie.Year})</span>
-                                        <p>
+                                        <div>
                                             {
                                                 selectedMovie.Rated
                                             } | {
@@ -107,9 +91,9 @@ class MoviesDetailsView extends Component {
                                                         <CustomBadges 
                                                             options={{
                                                                 label: genre,
-                                                                action: () => {}
+                                                                query: `${genre} film`
                                                             }} 
-                                                            key={ generateId() }/>
+                                                            key={ `${genre}_key` }/>
                                                     )
                                                 })
                                             } | {
@@ -119,7 +103,7 @@ class MoviesDetailsView extends Component {
                                             } | {
                                                 selectedMovie.Production
                                             }
-                                        </p>
+                                        </div>
                                     </div>
                                     <div className="moviesDetailsView__header-ratings col-md-3">
                                         <div>imdb Rating: {selectedMovie.imdbRating} <span className="fa fa-star checked"></span></div>
@@ -136,7 +120,7 @@ class MoviesDetailsView extends Component {
                                     </div>
                                     <div className="moviesDetailsView__description col-md-8 d-flex flex-column align-items-start">
                                         <div className="moviesDetailsView__description-plot">
-                                            { this.shouldRenderPlot(selectedMovie) }
+                                            { this.renderPlot(selectedMovie) }
                                         </div>
                                         <div className="moviesDetailsView__description-cast mb-4">
                                             <div>
@@ -155,10 +139,9 @@ class MoviesDetailsView extends Component {
                                                         return (
                                                             <CustomBadges 
                                                                 options={{
-                                                                    label: actor,
-                                                                    action: () => {}
-                                                                    }} 
-                                                                key={ generateId() }/>
+                                                                    label: actor
+                                                                }}
+                                                                key={ `${actor}_key` }/>
                                                         );
                                                     })
                                                 }
@@ -172,7 +155,7 @@ class MoviesDetailsView extends Component {
                                                     {
                                                         selectedMovie.Ratings.map( (source) => {
                                                             return (                                                            
-                                                                <li key={ generateId() } >
+                                                                <li key={ `${source.Source}_key` } >
                                                                     {source.Source}: {source.Value} 
                                                                 </li>                                                           
                                                             );
