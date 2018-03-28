@@ -10,7 +10,7 @@ export default class SearchView extends Component {
             <section className="searchView">
                 <div className="container">
                     <SearchBar/>
-                    <Movieslist/>               
+                    <Movieslist history={this.props.history} />               
                 </div>
             </section>
         );

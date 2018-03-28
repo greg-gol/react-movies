@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 
 import movies from './movies';
-import movieById from './movieById';
+import movieDetails from './movieDetails';
 import wikiData from './wikiData';
 
 export default combineReducers({
-  movieById, 
+  movieDetails, 
   movies,
   wikiData
 });

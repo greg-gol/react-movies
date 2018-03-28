@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import CustomButton from '../../components/common/customButton/customButton'
-import CustomBadges from '../../components/common/customBadges/customBadges'
+import WikiBadge from '../../components/common/customBadges/customBadges'
 
-import { fetchMovieById } from '../../actions/movieById';
+import { fetchMovieDetails } from '../../actions/movieDetails';
 import { goBack } from '../../actions/navigation';
 
 import { API_PARAMS } from '../../common/constants'
@@ -21,16 +21,16 @@ class MoviesDetailsView extends Component {
         };
     }
 
-    getMovieById() {
+    getMovieDetails() {
         const urlParamId = this.props.match.params.id;
-        const { selectedMovie } = this.props.movieById;
+        const { movieDetails } = this.props.movieDetails;
 
-        if (!selectedMovie
-            || (selectedMovie.imdbID !== urlParamId)) {
+        if (!movieDetails
+            || (movieDetails.imdbID !== urlParamId)) {
             const options = {
                 [API_PARAMS.ID]: urlParamId
             }
-            this.props.fetchMovieById(options);
+            this.props.fetchMovieDetails(options);
         }
     }
 
@@ -42,12 +42,12 @@ class MoviesDetailsView extends Component {
         });
     }
 
-    renderPlot = (selectedMovie) => {
+    renderPlot = (movieDetails) => {
         return (
             <div>
                 <h6><strong>Plot:</strong></h6>
                 <p>
-                    { this.state.showPlot ? selectedMovie.Plot : selectedMovie.Plot.substr(0, 20) }
+                    { this.state.showPlot ? movieDetails.Plot : movieDetails.Plot.substr(0, 20) }
                 </p>
                 <p className="btn btn-primary d-inline-block" onClick={this.togglePlot}>
                     {this.state.showPlot ? 'Hide plot' : 'Show Plot'}
@@ -56,110 +56,112 @@ class MoviesDetailsView extends Component {
         );
     }
 
+    renderFromArray = (data, type = null) => {
+        if (!Array.isArray(data)) {
+            return null;
+        }
+
+        return data.map(item => {
+            if (type === 'list') {
+                return (                                                            
+                    <li key={ `${item.Source}_key` } >
+                        {item.Source}: {item.Value} 
+                    </li>                                                           
+                );
+            }
+
+            return (
+                <WikiBadge
+                    options={{
+                        label: item,
+                        query: (type === 'genre') ? `${item} film` : null
+                    }}
+                    key={ `${item}_key` }/>
+            );
+        })
+    }
+
     componentWillMount() {
-        this.getMovieById();
+        this.getMovieDetails();
     }
 
     render() {
-        if (this.props.movieById.selectedMovie) {
-            const { selectedMovie } = this.props.movieById;
+        if (this.props.movieDetails.movieDetails) {
+            const { movieDetails } = this.props.movieDetails;
 
             return (
-                <section className="moviesDetailsView">
+                <section className="movieDetailsView">
                     <div className="container">
                         <div className="row">
-                            <div className="moviesDetailsView__header col-12">
+                            <div className="movieDetailsView__header col-12">
                                 <CustomButton options={{
                                     label: 'go back',
                                     action: { 
-                                        actionMethod: this.props.goBack,
+                                        method: this.props.goBack,
                                         param: this.props.history.goBack
                                     }
                                 }} />
                                 <div className="row">
-                                    <div className="moviesDetailsView__header-info col-md-9 mb-3">
-                                        <h3 className="moviesDetailsView__header-title d-inline-block mr-3">{selectedMovie.Title}</h3>
-                                        <span>({selectedMovie.Year})</span>
+                                    <div className="movieDetailsView__header-info col-md-9 mb-3">
+                                        <h3 className="movieDetailsView__header-title d-inline-block mr-3">{movieDetails.Title}</h3>
+                                        <span>({movieDetails.Year})</span>
                                         <div>
                                             {
-                                                selectedMovie.Rated
+                                                movieDetails.Rated
                                             } | {
-                                                selectedMovie.Runtime
+                                                movieDetails.Runtime
                                             } | {
-                                                selectedMovie.Genre.split(',').map( (genre) => {
-                                                    return (
-                                                        <CustomBadges 
-                                                            options={{
-                                                                label: genre,
-                                                                query: `${genre} film`
-                                                            }} 
-                                                            key={ `${genre}_key` }/>
-                                                    )
-                                                })
+                                                this.renderFromArray(movieDetails.Genre, 'genre')
                                             } | {
-                                                selectedMovie.Released
+                                                movieDetails.Released
                                             } | {
-                                                selectedMovie.Country
+                                                movieDetails.Country
                                             } | {
-                                                selectedMovie.Production
+                                                movieDetails.Production
                                             }
                                         </div>
                                     </div>
-                                    <div className="moviesDetailsView__header-ratings col-md-3">
-                                        <div>imdb Rating: {selectedMovie.imdbRating} <span className="fa fa-star checked"></span></div>
-                                        <div>Votes: {selectedMovie.imdbVotes}</div>
+                                    <div className="movieDetailsView__header-ratings col-md-3">
+                                        <div>imdb Rating: {movieDetails.imdbRating} <span className="fa fa-star checked"></span></div>
+                                        <div>Votes: {movieDetails.imdbVotes}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="row mb-4">
                             <div className="col-12">
-                                <div className="moviesDetailsView__description row">
-                                    <div className="oviesDetailsView__description-image col-md-4">
-                                        <img src={selectedMovie.Poster} className="img-fluid" alt="poster"/>
+                                <div className="movieDetailsView__description row">
+                                    <div className="movieDetailsView__description__poster col-md-4">
+                                        <img src={movieDetails.Poster} className="img-fluid" alt="poster"/>
                                     </div>
-                                    <div className="moviesDetailsView__description col-md-8 d-flex flex-column align-items-start">
-                                        <div className="moviesDetailsView__description-plot">
-                                            { this.renderPlot(selectedMovie) }
+                                    <div className="movieDetailsView__description col-md-8 d-flex flex-column align-items-start">
+                                        <div className="moviesDetailsView__description__plot">
+                                            { this.renderPlot(movieDetails) }
                                         </div>
-                                        <div className="moviesDetailsView__description-cast mb-4">
+                                        <div className="movieDetailsView__description__cast mb-4">
                                             <div>
-                                                <h6 className="d-inline-block"><strong>Director:</strong></h6> {selectedMovie.Director}
+                                                <h6 className="d-inline-block"><strong>Director:</strong></h6> {movieDetails.Director}
                                             </div>
                                             <div>
-                                                <h6 className="d-inline-block"><strong>Writer:</strong></h6> {selectedMovie.Writer}
+                                                <h6 className="d-inline-block"><strong>Writer:</strong></h6> {movieDetails.Writer}
                                             </div>
                                             <div>
-                                                <h6 className="d-inline-block"><strong>Language:</strong></h6> {selectedMovie.Language}
+                                                <h6 className="d-inline-block"><strong>Language:</strong></h6> {movieDetails.Language}
                                             </div>
                                             <div>
                                                 <h6 className="d-inline-block"><strong>Actors: </strong></h6>
                                                 {
-                                                    selectedMovie.Actors.split(',').map( (actor) => {
-                                                        return (
-                                                            <CustomBadges 
-                                                                options={{
-                                                                    label: actor
-                                                                }}
-                                                                key={ `${actor}_key` }/>
-                                                        );
-                                                    })
+                                                    this.renderFromArray(movieDetails.Actors)
                                                 }
                                             </div>
                                         </div>
-                                        <div className="moviesDetailsView__description-ratings mt-auto">
+                                        <div className="movieDetailsView__description__ratings mt-auto">
                                             <div>
                                                 <h6><strong>Ratings:</strong></h6>
                                                 <ul>
-                                                    <li>Metascore: {selectedMovie.Metascore}</li>
+                                                    <li>Metascore: {movieDetails.Metascore}</li>
                                                     {
-                                                        selectedMovie.Ratings.map( (source) => {
-                                                            return (                                                            
-                                                                <li key={ `${source.Source}_key` } >
-                                                                    {source.Source}: {source.Value} 
-                                                                </li>                                                           
-                                                            );
-                                                        })
+                                                        this.renderFromArray(movieDetails.Ratings, 'list')
                                                     }
                                                 </ul>
                                             </div>
@@ -170,18 +172,12 @@ class MoviesDetailsView extends Component {
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <div className="moviesDetailsView__misc">
+                                <div className="movieDetailsView__misc">
                                     <p>
-                                        <strong>Awards: </strong> {selectedMovie.Awards}> |
-                                        <strong>Box office: </strong> {selectedMovie.BoxOffice} | 
-                                        <strong>On DVD: </strong> {selectedMovie.DVD} | 
-                                        <strong>Website: </strong>
-                                        <CustomButton options={{
-                                            label: selectedMovie.Website,
-                                            url: selectedMovie.Website,
-                                            target: '_blank',
-                                            className: 'link'
-                                        }} />
+                                        <strong>Awards: </strong> {movieDetails.Awards}> |
+                                        <strong>Box office: </strong> {movieDetails.BoxOffice} | 
+                                        <strong>On DVD: </strong> {movieDetails.DVD} | 
+                                        <strong>Website: </strong> <a href={movieDetails.Website} className="link" rel="nofollow" target="_blank">{movieDetails.Website}</a>
                                     </p>                                           
                                 </div>
                             </div>
@@ -198,17 +194,17 @@ class MoviesDetailsView extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fetchMovieById,
+        fetchMovieDetails,
         goBack
     }, dispatch)
 }
 
 
 function mapStateToProps(state) {
-    const { movieById } = state;
+    const { movieDetails } = state;
 
     return {
-        movieById
+        movieDetails
     }
 }
 

@@ -10,6 +10,18 @@ export function* goBack(action) {
   }
 }
 
+export function* goTo(action) {
+  try {
+    yield action.payload.method(action.payload.args);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export function* watchGoBack() {
   yield takeLatest(ActionTypes.GO_BACK, goBack);
+}
+
+export function* watchGoTo() {
+  yield takeLatest(ActionTypes.GO_TO, goTo);
 }

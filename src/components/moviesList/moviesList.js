@@ -15,13 +15,14 @@ class MoviesList extends Component {
                     <table>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Title</th>
                                 <th>Year</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                movies.moviesList.Search.map(movie => <MovieItem movieData={movie} key={movie.imdbID}/>)
+                                movies.moviesList.Search.map(movie => <MovieItem history={this.props.history} movieData={movie} key={movie.imdbID}/>)
                             }
                         </tbody>
                     </table>

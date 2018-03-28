@@ -6,3 +6,10 @@ export const goBack = (options) => {
     payload: options
   }
 }
+
+export const goTo = (options) => {
+  return {
+    type: ActionTypes.GO_TO,
+    payload: options
+  }
+}

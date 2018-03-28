@@ -5,10 +5,31 @@ import { bindActionCreators } from 'redux';
 import ToolTip from '../toolTip/toolTip'
 
 import { fetchWikiData } from '../../../actions/fetchWikiData';
+
 import { WIKI_API_PARAMS } from '../../../common/constants'
+
 import './customBadges.scss';
 
-class CustomBadges extends Component {
+
+export class CustomBadge extends Component {
+
+    render() {
+        const { options } = this.props;
+        const badge = (            
+            <div className={this.props.action ? "customBadge" : "customBadge customBadge-noAction"}>
+                <span 
+                    className={options.className ? options.className : 'badge badge-pill badge-primary'}
+                    onClick={this.props.action ? this.props.action : null}>
+                    { options.label }
+                </span>
+            </div>);
+
+        return options.label ? badge : null;
+    }
+}
+
+class WikiBadge extends Component {
+
     constructor(props) {
         super(props);
 
@@ -22,8 +43,8 @@ class CustomBadges extends Component {
         const { data } = this.props.wikiData;
         const { label, query } = this.props.options;
         this.searchQuery = query ? query : label;
-
-        if (!data || label !== data[0]) {
+        
+        if (!data || this.searchQuery !== data[0]) {
             const xhrOptions = {
                 [WIKI_API_PARAMS.SEARCH]: this.searchQuery
             }
@@ -49,21 +70,17 @@ class CustomBadges extends Component {
     }
 
     render() {
-        const { options } = this.props;
         const { data } = this.props.wikiData;
 
         return (
-            <div className="customBadge">
+            <div className="wikiBadge">
                 { this.state.showToolTip && data && data[0] === this.searchQuery ? this.renderToolTip(data) : null }
-                <span 
-                    className={options.className ? options.className : 'badge badge-pill badge-primary'}
-                    onClick={options.action ? options.action : this.fetchData}>
-                    {options.label}
-                </span>
+                <CustomBadge {...this.props} {...this.state} action={this.fetchData} />
             </div>
         );
     }
 }
+
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
@@ -80,4 +97,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomBadges);
+export default connect(mapStateToProps, mapDispatchToProps)(WikiBadge);

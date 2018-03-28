@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class MovieItem extends Component {
+import { goTo } from '../actions/navigation';
+
+import CustomButton from './common/customButton/customButton';
+
+
+class MovieItem extends Component {
 
     render() {
         const { movieData } = this.props;
@@ -9,10 +15,28 @@ export default class MovieItem extends Component {
         return (
             <tr className="moviesList__movieItem">
                 <td>
-                    <Link to={`/movie-details/${ movieData.imdbID }`}>{ movieData.Title }</Link>
+                    <CustomButton options={{
+                        label: 'Show details',
+                        action: { 
+                            method: this.props.goTo,
+                            param: {
+                                method: this.props.history.push,
+                                args: `/movie-details/${movieData.imdbID}`
+                            }
+                        }
+                    }} />
                 </td>
+                <td>{ movieData.Title }</td>
                 <td>{ movieData.Year }</td>
             </tr>
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        goTo
+    }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(MovieItem);
