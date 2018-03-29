@@ -6,7 +6,7 @@ export default function movies(state = {}, action) {
 
   switch(action.type) {
     case ActionTypes.POPULATE_MOVIES:
-      return {...newState, moviesList: action.payload.movies}
+      return {...newState, ...action.payload.movies}
       
     default:
       return {...newState};

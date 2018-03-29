@@ -9,7 +9,7 @@ class MoviesList extends Component {
     render() {
         const { movies } = this.props; 
 
-        if(movies.moviesList && movies.moviesList.Search) {
+        if(movies && movies.Search) {
             return (
                 <div className="moviesList">
                     <table>
@@ -22,7 +22,7 @@ class MoviesList extends Component {
                         </thead>
                         <tbody>
                             {
-                                movies.moviesList.Search.map(movie => <MovieItem history={this.props.history} movieData={movie} key={movie.imdbID}/>)
+                                movies.Search.map(movie => <MovieItem history={this.props.history} movieData={movie} key={movie.imdbID}/>)
                             }
                         </tbody>
                     </table>

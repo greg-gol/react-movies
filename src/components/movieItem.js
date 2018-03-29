@@ -17,12 +17,10 @@ class MovieItem extends Component {
                 <td>
                     <CustomButton options={{
                         label: 'Show details',
-                        action: { 
-                            method: this.props.goTo,
-                            param: {
-                                method: this.props.history.push,
-                                args: `/movie-details/${movieData.imdbID}`
-                            }
+                        action: this.props.goTo,
+                        actionParameters: {
+                            historyPush: this.props.history.push,
+                            path: `/movie-details/${movieData.imdbID}`
                         }
                     }} />
                 </td>

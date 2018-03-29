@@ -1,5 +1,8 @@
 .customBadge {
-	&.customBadge-noAction {
+	position: relative;
+	display: inline-block;
+	
+	&.customBadge--noAction {
 		.badge {
 			cursor: default;
 		}
@@ -8,9 +11,4 @@
 	.badge {
 		cursor: pointer;
 	}
-}
-
-.wikiBadge, .customBadge  {
-	position: relative;
-	display: inline-block;
 }

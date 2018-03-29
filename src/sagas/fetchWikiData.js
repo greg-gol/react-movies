@@ -1,7 +1,7 @@
 import {call, put, takeLatest } from 'redux-saga/effects';
 
 import serverApi from '../api/serverApi';
-import {populateWikiData} from '../actions/fetchWikiData';
+import {populateWikiData} from '../actions/wikiData';
 import {ActionTypes} from '../common/constants';
 
 export function* fetchWikiData(action) {

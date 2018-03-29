@@ -12,16 +12,13 @@ export function* goBack(action) {
 
 export function* goTo(action) {
   try {
-    yield action.payload.method(action.payload.args);
+    yield action.payload.historyPush(action.payload.path);
   } catch (error) {
     console.error(error);
   }
 }
 
-export function* watchGoBack() {
+export function* watchNavigation() {
   yield takeLatest(ActionTypes.GO_BACK, goBack);
-}
-
-export function* watchGoTo() {
   yield takeLatest(ActionTypes.GO_TO, goTo);
 }

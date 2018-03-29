@@ -6,7 +6,7 @@ export default function wikiData(state = {}, action) {
 
   switch(action.type) {
     case ActionTypes.POPULATE_WIKI_DATA:
-      return {...newState, data: action.payload}
+      return {...newState, ...action.payload}
       
     default:
       return {...newState};

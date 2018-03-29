@@ -7,8 +7,8 @@ export default class CustomButton extends Component {
         const { options } = this.props; 
         e.preventDefault();
         
-        if (options.action.param)    {
-            options.action.method(options.action.param);
+        if (options.actionParameters)    {
+            options.action(options.actionParameters);
         } else {
             options.action.method();
         }
