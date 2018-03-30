@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './customBadges.scss';
 
 
-export default class CustomBadge extends Component {
+export default function CustomBadges(props) {
+    const {options} = props;
+    const badge = (            
+        <div className={props.action ? "customBadge" : "customBadge customBadge--noAction"}>
+            <span 
+                className={options.className ? options.className : 'badge badge-pill badge-primary'}
+                onClick={props.action ? props.action : null}>
+                {options.label}
+            </span>
+        </div>);
 
-    render() {
-        const {options} = this.props;
-        const badge = (            
-            <div className={this.props.action ? "customBadge" : "customBadge customBadge--noAction"}>
-                <span 
-                    className={options.className ? options.className : 'badge badge-pill badge-primary'}
-                    onClick={this.props.action ? this.props.action : null}>
-                    {options.label}
-                </span>
-            </div>);
-
-        return options.label ? badge : null;
-    }
+    return options.label ? badge : null; 
 }
