@@ -33,7 +33,7 @@ class MoviesDetailsView extends Component {
         }
     }
 
-    renderMovieHeader(movieDetails) {
+    renderMovieDetailsHeader(movieDetails) {
         return(
             <div className="movieDetailsView__header row">
                 <div className="col-12">
@@ -72,7 +72,7 @@ class MoviesDetailsView extends Component {
         );
     }
 
-    renderMovieDescription(movieDetails) {
+    renderMovieDetailsDescription(movieDetails) {
         return(
             <div className="movieDetailsView__description row mb-4">
                 <div className="col-12">
@@ -113,7 +113,7 @@ class MoviesDetailsView extends Component {
         );
     }
 
-    renderMovieMiscInformation(movieDetails) {
+    renderMovieDetailsFooter(movieDetails) {
         return(
             <div className="movieDetailsView__misc row">
                 <div className="col-12">
@@ -189,9 +189,9 @@ class MoviesDetailsView extends Component {
         return (
             <section className="movieDetailsView">
                 <div className="container">
-                    {this.renderMovieHeader(movieDetails)}
-                    {this.renderMovieDescription(movieDetails)}
-                    {this.renderMovieMiscInformation(movieDetails)}
+                    {this.renderMovieDetailsHeader(movieDetails)}
+                    {this.renderMovieDetailsDescription(movieDetails)}
+                    {this.renderMovieDetailsFooter(movieDetails)}
                 </div>
             </section>
         );
