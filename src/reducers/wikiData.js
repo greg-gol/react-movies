@@ -1,12 +1,12 @@
 import {ActionTypes} from '../common/constants';
 import _ from 'lodash';
 
-export default function movies(state = {}, action) {
+export default function wikiData(state = {}, action) {
   const newState = _.cloneDeep(state);
 
   switch(action.type) {
-    case ActionTypes.POPULATE_MOVIES:
-      return {...newState, ...action.payload.movies}
+    case ActionTypes.POPULATE_WIKI_DATA:
+      return {...newState, ...action.payload}
       
     default:
       return {...newState};

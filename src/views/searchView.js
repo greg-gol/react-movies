@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import SearchBar from '../components/searchBar';
 import Movieslist from '../components/moviesList/moviesList';
 
 
-export default class SearchView extends Component {
-    render() {
-        return (
-            <div className="searchView">
+export default function SearchView(props) {
+    return (
+        <section className="searchView">
+            <div className="container">
                 <SearchBar/>
-                <Movieslist/>
+                <Movieslist history={props.history} />               
             </div>
-        );
-    }
+        </section>
+    );
 }

@@ -64,6 +64,13 @@
       "pathRewrite": {
         "^/papi/": "?apikey=35fa6920"
       }
+    },
+    "/wiki/*": {
+      "target": "https://en.wikipedia.org/w/api.php",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/wiki/": "?action=opensearch&format=json&limit=1"
+      }
     }
   },
   "jest": {
