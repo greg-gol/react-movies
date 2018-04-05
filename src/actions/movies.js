@@ -10,8 +10,6 @@ export const fetchMovies = (options) => {
 export const populateMovies = (movies) => {
   return {
     type: ActionTypes.POPULATE_MOVIES,
-    payload: {
-      movies
-    }
+    payload: movies
   }
 }

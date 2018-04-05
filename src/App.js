@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/navBar';
 import SearchView from './views/searchView';
+import AddMovieView from './views/addMovieView';
 import MovieDetailsView from './views/movieDetailsView/movieDetailsView';
 
 import logo from './logo.svg';
@@ -23,6 +24,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/search" component={SearchView} />
           <Route path="/movie-details/:id" component={MovieDetailsView} />
+          <Route path="/add-movie" component={AddMovieView} />
         </Switch>
       </div>
     );
