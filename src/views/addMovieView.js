@@ -37,7 +37,6 @@ class AddMovieView extends Component {
     }
 
     render() {
-        console.log('form', this.props.form);
         const {form} = this.props;
         return (
             <section className="addMovieView">

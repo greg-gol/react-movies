@@ -18,7 +18,7 @@ export function* fetchMovies(action) {
       }
     });
 
-    if(!movies.Search[0] || movies.Search.length === 0) {
+    if (!movies.Search[0] || movies.Search.length === 0) {
       movies = yield call(serverApi.getMovies, action.payload);
     }
 

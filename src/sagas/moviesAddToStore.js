@@ -1,7 +1,7 @@
 import {put, takeEvery} from 'redux-saga/effects';
 
 import {populateStoredMovies} from '../actions/storedMovies';
-import {ActionTypes, API_PARAMS} from '../common/constants';
+import {ActionTypes} from '../common/constants';
 
 export function* addMovieToStore(action) {
   try {

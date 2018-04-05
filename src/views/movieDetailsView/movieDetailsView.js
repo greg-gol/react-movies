@@ -79,7 +79,7 @@ class MoviesDetailsView extends Component {
         if (movieDetails[MOVIE_DETAILS.POSTER]) {
             poster = <img src={movieDetails[MOVIE_DETAILS.POSTER]} className="img-fluid" alt="poster"/>
         } else {
-            poster = (<a href="https://placeholder.com"><img src="http://via.placeholder.com/200x350"/></a>);
+            poster = (<a href="https://placeholder.com"><img src="http://via.placeholder.com/200x350" alt="placeholder"/></a>);
         }
 
         return(
