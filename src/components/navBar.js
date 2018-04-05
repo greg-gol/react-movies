@@ -10,6 +10,9 @@ export default function NavBar(props) {
                     <li className="nav-item">
                         <Link to="/search" className="nav-link">Search movies</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to="/add-movie" className="nav-link">Add movie</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { goTo } from '../actions/navigation';
+import {API_PARAMS} from '../common/constants';
 
 import CustomButton from './common/customButton/customButton';
+
+const {MOVIE_DETAILS} = API_PARAMS;
 
 
 function MovieItem(props) {
@@ -18,12 +21,12 @@ function MovieItem(props) {
                     action: props.goTo,
                     actionParameters: {
                         historyPush: props.history.push,
-                        path: `/movie-details/${movieData.imdbID}`
+                        path: `/movie-details/${movieData[MOVIE_DETAILS.ID]}`
                     }
                 }} />
             </td>
-            <td>{ movieData.Title }</td>
-            <td>{ movieData.Year }</td>
+            <td>{ movieData[MOVIE_DETAILS.TITLE] }</td>
+            <td>{ movieData[MOVIE_DETAILS.YEAR] }</td>
         </tr>
     );
 }
