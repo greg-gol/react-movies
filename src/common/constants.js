@@ -14,7 +14,6 @@ const ActionTypes = keyMirror({
   GO_TO: null,
   PROCESS_INPUT_CHANGE: null,
   RESET_FORM: null,
-  CLEAN_FORM: null,
   STORE_INPUT_CHANGE: null
 });
 

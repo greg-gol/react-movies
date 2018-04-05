@@ -19,9 +19,3 @@ export const resetForm = () => {
     type: ActionTypes.RESET_FORM
   }
 }
-
-export const cleanForm = () => {
-  return {
-    type: ActionTypes.CLEAN_FORM
-  }
-}

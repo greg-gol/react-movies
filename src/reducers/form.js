@@ -87,7 +87,7 @@ export default function form(state = defaultForm, action) {
       newState[action.payload.key] = action.payload.value;
       return {...newState};
 
-    case ActionTypes.CLEAN_FORM:
+    case ActionTypes.RESET_FORM:
       return {...defaultForm};
 
     default:
